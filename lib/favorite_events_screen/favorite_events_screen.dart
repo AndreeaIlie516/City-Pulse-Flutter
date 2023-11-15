@@ -5,8 +5,8 @@ import '../event/event_cell.dart';
 import '../event/event_provider.dart';
 
 
-class PopularEventsScreenView extends StatelessWidget {
-  const PopularEventsScreenView({super.key});
+class FavoriteEventsScreenView extends StatelessWidget {
+  const FavoriteEventsScreenView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +63,7 @@ class SetScreenTitle extends StatelessWidget {
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          'Popular Events',
+          'Your Favorite Events:',
           style: TextStyle(
             color: Colors.black,
             fontSize: 25.0,
@@ -82,14 +82,16 @@ class EventList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final favoriteEvents = eventProvider.events.where((eventModel) => eventModel.isFavorite).toList();
+
     return ListView.builder(
-      itemCount: eventProvider.events.length,
+      itemCount: favoriteEvents.length,
       itemBuilder: (context, index) {
-        return EventCellMain(
-            event: eventProvider.events[index].event,
+        return EventCellFavorite(
+            event: favoriteEvents[index].event,
             onClickEvent: () {  },
-            onClickFavoriteEvent: () { eventProvider.toggleFavoriteStatus(index); },
-            isFavorite: eventProvider.events[index].isFavorite);
+            onClickUpdateEvent: () { },
+            isEditable: favoriteEvents[index].isEditable);
       },
     );
   }

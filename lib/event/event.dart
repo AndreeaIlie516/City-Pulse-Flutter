@@ -10,6 +10,7 @@ class Event {
 class EventModel {
   final Event event;
   bool isFavorite;
+  bool isEditable;
 
-  EventModel({required this.event, this.isFavorite = false});
+  EventModel({required this.event, this.isFavorite = false, this.isEditable = true});
 }

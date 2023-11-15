@@ -6,27 +6,33 @@ class EventProvider with ChangeNotifier {
   final List<EventModel> _events = [
     EventModel(
         event: Event(time: '27 Oct - 19:30', band: 'Coma + Om la Lună', location: 'Zazen Garden', imagePath: 'assets/images/first_event_photo.png'),
-        isFavorite: false
+        isFavorite: false,
+        isEditable: true
     ),
     EventModel(
         event: Event(time: '04 Nov - 21:30', band: 'Vama', location: '/FORM SPACE', imagePath: 'assets/images/second_event_photo.png'),
-        isFavorite: false
+        isFavorite: false,
+        isEditable: false
     ),
     EventModel(
         event: Event(time: '11 Nov - 21:00', band: 'Stratovarius\nSonata Arctica', location: '/FORM SPACE', imagePath: 'assets/images/third_event_photo.jpg'),
-        isFavorite: false
+        isFavorite: false,
+        isEditable: false
     ),
     EventModel(
         event: Event(time: '06 Dec - 21:00', band: 'Asaf Avidan', location: '/FORM SPACE', imagePath: 'assets/images/forth_event_photo.jpg'),
-        isFavorite: false
+        isFavorite: false,
+        isEditable: false
     ),
     EventModel(
         event: Event(time: '07 Dec - 20:30', band: 'Tarja', location: '/FORM SPACE', imagePath: 'assets/images/fifth_event_photo.jpg'),
-        isFavorite: false
+        isFavorite: false,
+        isEditable: false
     ),
     EventModel(
         event: Event(time: '27 Feb - 18:00', band: 'Cradle of Filth', location: '/FORM SPACE', imagePath: 'assets/images/sixth_event_photo.jpg'),
-        isFavorite: false
+        isFavorite: false,
+        isEditable: false
     ),
 
   ];
@@ -36,8 +42,6 @@ class EventProvider with ChangeNotifier {
   void toggleFavoriteStatus(int index) {
     _events[index].isFavorite = !_events[index].isFavorite;
     notifyListeners();
-    for(int i=0; i<events.length; i++) {
-    }
   }
 
 }
