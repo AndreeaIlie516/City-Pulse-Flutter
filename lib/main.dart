@@ -1,9 +1,17 @@
+import 'package:city_pulse/popular_events_screen/popular_events_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'event/event_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => EventProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -21,56 +29,13 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: MainScreenView(),
-        bottomNavigationBar: BottomNavigationBarWidget(),
-      ),
-    );
-  }
-}
-
-class SetTitle extends StatelessWidget {
-  const SetTitle({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(left: 20.0, top: 60.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            'CityPulse',
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              color: Color(0xff515BE9),
-              fontSize: 30.0,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Sf pro Display'
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class MainScreenView extends StatelessWidget {
-  const MainScreenView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
     return const Scaffold(
-      body: Column(
-        children: [
-          SetTitle(),
-        ],
-      ),
+        body: PopularEventsScreenView(),
+        bottomNavigationBar: BottomNavigationBarWidget(),
     );
   }
 }
+
 
 class BottomNavigationBarWidget extends StatelessWidget {
   const BottomNavigationBarWidget({super.key});
@@ -78,21 +43,58 @@ class BottomNavigationBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
+      items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            backgroundColor: Color(0xff515BE9)
+          icon: Padding(
+            padding: EdgeInsets.only(top: 10),
+            child: Image.asset(
+              'assets/images/home_empty.png',
+              width: 30.0,
+              height: 30.0,
+            ),
+          ),
+          label: 'Home',
+          activeIcon: Padding(
+            padding: EdgeInsets.only(top: 10),
+            child: Image.asset(
+              'assets/images/home_full.png',
+              width: 30.0,
+              height: 30.0,
+            ),
+          ),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.favorite),
+          icon: Padding(
+            padding: EdgeInsets.only(top: 10),
+            child: Image.asset(
+              'assets/images/heart_empty.png',
+              width: 30.0,
+              height: 30.0,
+            ),
+          ),
           label: 'Favorites',
+          activeIcon: Padding(
+            padding: EdgeInsets.only(top: 5),
+            child: Image.asset(
+              'assets/images/heart_full_purple.png',
+              width: 30.0,
+              height: 30.0,
+            ),
+          ),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: Padding(
+            padding: EdgeInsets.only(top: 5),
+            child: Image.asset(
+              'assets/images/user_empty.png',
+              width: 30.0,
+              height: 30.0,
+            ),
+          ),
           label: 'Profile',
         )
       ],
+      selectedItemColor: const Color(0xff515BE9),
     );
   }
 }
