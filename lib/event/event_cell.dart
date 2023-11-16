@@ -28,6 +28,9 @@ class EventCellMain extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
               ),
+              constraints: const BoxConstraints(
+                minHeight: 90.0,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
@@ -45,6 +48,7 @@ class EventCellMain extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       padding: const EdgeInsets.only(left: 20),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
@@ -122,6 +126,9 @@ class EventCellFavorite extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
               ),
+              constraints: const BoxConstraints(
+                minHeight: 90.0,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
@@ -139,14 +146,17 @@ class EventCellFavorite extends StatelessWidget {
                         width: 87,
                         height: 74,
                         fit: BoxFit.cover,
-                      )
-                      ,
+                        errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                          return const Icon(Icons.error, size: 74);
+                        },
+                      ),
                     ),
                   Expanded(
                     child: Container(
                       alignment: Alignment.centerLeft,
                       padding: const EdgeInsets.only(left: 20),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(

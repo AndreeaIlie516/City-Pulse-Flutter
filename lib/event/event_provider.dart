@@ -63,4 +63,18 @@ class EventProvider with ChangeNotifier {
     }
   }
 
+  void deleteEventFromFavorites({required int index}) {
+    if (index >= 0 && index < _events.length) {
+      _events[index].isFavorite = false;
+      notifyListeners();
+    }
+  }
+
+  void deleteEvent({required int index}) {
+    if (index >= 0 && index < _events.length) {
+      _events.removeAt(index);
+      notifyListeners();
+    }
+  }
+
 }
