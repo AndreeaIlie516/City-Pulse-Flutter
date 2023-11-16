@@ -99,14 +99,14 @@ class EventCellFavorite extends StatelessWidget {
   final Event event;
   final VoidCallback onClickEvent;
   final VoidCallback onClickUpdateEvent;
-  final bool isEditable;
+  final bool isPrivate;
 
   const EventCellFavorite({
     Key? key,
     required this.event,
     required this.onClickEvent,
     required this.onClickUpdateEvent,
-    this.isEditable = true,
+    this.isPrivate = true,
   }) : super(key: key);
 
   @override
@@ -128,11 +128,19 @@ class EventCellFavorite extends StatelessWidget {
                   if (event.imagePath != null && event.imagePath != '')
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
+                      child: !isPrivate ? Image.asset(
                         event.imagePath!,
                         width: 87,
                         height: 74,
-                      ),
+                      )
+                      :
+                      Image.network(
+                        event.imagePath!,
+                        width: 87,
+                        height: 74,
+                        fit: BoxFit.cover,
+                      )
+                      ,
                     ),
                   Expanded(
                     child: Container(
@@ -173,14 +181,14 @@ class EventCellFavorite extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    icon: isEditable
+                    icon: isPrivate
                         ? Image.asset(
                             'assets/images/pen.png',
                             width: 25.0,
                             height: 25.0,
                           )
                         : const SizedBox.shrink(),
-                    onPressed: isEditable ? onClickUpdateEvent : null,
+                    onPressed: isPrivate ? onClickUpdateEvent : null,
                   ),
                 ],
               ),

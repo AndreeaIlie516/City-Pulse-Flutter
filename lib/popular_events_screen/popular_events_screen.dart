@@ -82,11 +82,12 @@ class EventList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final events = eventProvider.events.where((eventModel) => !eventModel.isPrivate).toList();
     return ListView.builder(
-      itemCount: eventProvider.events.length,
+      itemCount: events.length,
       itemBuilder: (context, index) {
         return EventCellMain(
-            event: eventProvider.events[index].event,
+            event: events[index].event,
             onClickEvent: () {  },
             onClickFavoriteEvent: () { eventProvider.toggleFavoriteStatus(index); },
             isFavorite: eventProvider.events[index].isFavorite);

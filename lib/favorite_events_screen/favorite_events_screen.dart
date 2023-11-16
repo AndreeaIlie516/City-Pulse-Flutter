@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../add_event_screen/add_event_screen.dart';
 import '../event/event_cell.dart';
 import '../event/event_provider.dart';
 import '../update_event_screen/update_event_screen.dart';
@@ -25,6 +26,7 @@ class FavoriteEventsScreenView extends StatelessWidget {
               },
             ),
           ),
+          const AddButton()
         ],
       ),
     );
@@ -97,8 +99,49 @@ class EventList extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => UpdateEventScreenView(eventIndex: index)),
               );
             },
-            isEditable: favoriteEvents[index].isEditable);
+            isPrivate: favoriteEvents[index].isPrivate);
       },
     );
   }
 }
+
+
+class AddButton extends StatelessWidget {
+  const AddButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 20.0),
+      child: Align(
+        alignment: Alignment.centerRight,
+        child:ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xff515BE9),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            fixedSize: const Size(50.0, 50.0),
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AddEventScreenView()),
+            );
+          },
+          child: const Text(
+            "+",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Sf pro Display',
+            ),
+          ),
+        ),
+      )
+    );
+  }
+}
+
+
