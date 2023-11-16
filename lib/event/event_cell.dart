@@ -31,14 +31,15 @@ class EventCellMain extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      event.imagePath,
-                      width: 87,
-                      height: 74,
+                  if (event.imagePath != null && event.imagePath != '')
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(
+                        event.imagePath!,
+                        width: 87,
+                        height: 74,
+                      ),
                     ),
-                  ),
                   Expanded(
                     child: Container(
                       alignment: Alignment.centerLeft,
@@ -124,14 +125,15 @@ class EventCellFavorite extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      event.imagePath,
-                      width: 87,
-                      height: 74,
+                  if (event.imagePath != null && event.imagePath != '')
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(
+                        event.imagePath!,
+                        width: 87,
+                        height: 74,
+                      ),
                     ),
-                  ),
                   Expanded(
                     child: Container(
                       alignment: Alignment.centerLeft,

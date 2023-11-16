@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../event/event_cell.dart';
 import '../event/event_provider.dart';
+import '../update_event_screen/update_event_screen.dart';
 
 
 class FavoriteEventsScreenView extends StatelessWidget {
@@ -90,7 +91,12 @@ class EventList extends StatelessWidget {
         return EventCellFavorite(
             event: favoriteEvents[index].event,
             onClickEvent: () {  },
-            onClickUpdateEvent: () { },
+            onClickUpdateEvent: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => UpdateEventScreenView(eventIndex: index)),
+              );
+            },
             isEditable: favoriteEvents[index].isEditable);
       },
     );

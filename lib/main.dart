@@ -35,24 +35,50 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _widgetOptions = [
-    const PopularEventsScreenView(),
-    const FavoriteEventsScreenView()
+  final List<GlobalKey<NavigatorState>> _navigatorKeys = [
+    GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (_selectedIndex == index) {
+      // Pop to first route when tapping the same tab
+      _navigatorKeys[index].currentState?.popUntil((route) => route.isFirst);
+    } else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _widgetOptions.elementAt(_selectedIndex),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: <Widget>[
+          _buildOffstageNavigator(0, const PopularEventsScreenView()),
+          _buildOffstageNavigator(1, const FavoriteEventsScreenView()),
+          // Add more navigator for more tabs
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBarWidget(
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
+      ),
+    );
+  }
+
+  Widget _buildOffstageNavigator(int index, Widget child) {
+    return Offstage(
+      offstage: _selectedIndex != index,
+      child: Navigator(
+        key: _navigatorKeys[index],
+        onGenerateRoute: (settings) {
+          return MaterialPageRoute(
+            builder: (context) => child,
+          );
+        },
       ),
     );
   }
