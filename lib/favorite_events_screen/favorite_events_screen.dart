@@ -90,14 +90,19 @@ class EventList extends StatelessWidget {
     return ListView.builder(
       itemCount: favoriteEvents.length,
       itemBuilder: (context, index) {
+        final originalIndex = eventProvider.events.indexOf(favoriteEvents[index]);
+
         return EventCellFavorite(
             event: favoriteEvents[index].event,
             onClickEvent: () {  },
             onClickUpdateEvent: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => UpdateEventScreenView(eventIndex: index)),
-              );
+              if(originalIndex != -1) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>
+                      UpdateEventScreenView(eventIndex: originalIndex)),
+                );
+              }
             },
             isPrivate: favoriteEvents[index].isPrivate);
       },
